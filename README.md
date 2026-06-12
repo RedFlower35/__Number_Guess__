@@ -1,20 +1,42 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# 猜數字遊戲 (Number Guessing Game)
 
-# Run and deploy your AI Studio app
+這是一個精美的、響應式的網頁版**猜數字遊戲**。本專案最初由 Google AI Studio 產生（基於 Next.js 框架），現已轉換為**純靜圖網頁版**（標準 HTML / CSS / JavaScript），無須安裝任何 Node.js 依賴或設定開發伺服器，雙擊即可直接在任何瀏覽器中開啟與遊玩。
 
-This contains everything you need to run your app locally.
+## 🌟 遊戲特點
 
-View your app in AI Studio: https://ai.studio/apps/ffff50ee-daec-4770-9fac-a3e73eb7a992
+- **現代化磨砂玻璃風格 (Glassmorphism)**：使用深色漸層背景與半透明玻璃質感設計，搭配精美微動畫，提供流暢舒適的視覺體驗。
+- **動態範圍提示**：每次猜測後，系統會自動縮小數字範圍（如 `1 - 100` 縮小為 `25 - 60`），並即時呈現在介面上。
+- **猜測次數進度條**：以漸變色進度條直觀展示剩餘猜測次數（共 10 次機會），次數緊張時會變色警告。
+- **歷史紀錄面板**：清晰記錄每一次猜測的數字以及結果（太大了、太小了），方便玩家進行推理。
+- **勝利特效**：猜對答案時，會觸發精美的五彩紙屑（Confetti）全螢幕灑落慶祝動畫。
+- **完全零依賴**：不需要安裝 Node.js、npm 或任何打包工具，純原生網頁技術實現。
 
-## Run Locally
+## 🚀 快速開始
 
-**Prerequisites:**  Node.js
+### 本地執行
+1. 下載或複製本專案的程式碼。
+2. 在專案根目錄中找到 [index.html](index.html) 檔案。
+3. **按兩下** [index.html](index.html) 檔案，即可直接在瀏覽器中開啟並開始遊戲！
 
+---
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 📂 檔案結構
+
+- [index.html](index.html)：網頁結構與主畫面。
+- [style.css](style.css)：現代化 UI 樣式表、響應式排版與漸變動畫。
+- [app.js](app.js)：遊戲邏輯控制、歷史紀錄更新以及 canvas 紙屑動畫特效。
+
+---
+
+## 🛠️ 開發與修改
+
+如果你想要自行修改此遊戲：
+- 若要調整外觀與配色，可修改 [style.css](style.css) 中的 `:root` 變數（如 `--primary-color`、`--bg-gradient` 等）。
+- 若要調整遊戲規則（例如修改最大猜測次數或數字上限），可修改 [app.js](app.js) 最上方的變數定義：
+  ```javascript
+  let targetNumber = 0;
+  let attempts = 0;
+  const maxAttempts = 10; // 調整最大猜測次數
+  let minRange = 1;
+  let maxRange = 100;    // 調整數字上限
+  ```
