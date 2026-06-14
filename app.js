@@ -232,5 +232,33 @@ function animateConfetti() {
   requestAnimationFrame(animateConfetti);
 }
 
+// Theme Toggle Logic
+const themeToggleBtn = document.getElementById('theme-toggle');
+const moonIcon = document.getElementById('theme-icon-moon');
+const sunIcon = document.getElementById('theme-icon-sun');
+
+// Check localStorage for saved theme preference
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'light') {
+  document.body.classList.add('light-theme');
+  moonIcon.classList.add('hidden');
+  sunIcon.classList.remove('hidden');
+}
+
+themeToggleBtn.addEventListener('click', () => {
+  document.body.classList.toggle('light-theme');
+  const isLight = document.body.classList.contains('light-theme');
+  
+  if (isLight) {
+    localStorage.setItem('theme', 'light');
+    moonIcon.classList.add('hidden');
+    sunIcon.classList.remove('hidden');
+  } else {
+    localStorage.setItem('theme', 'dark');
+    moonIcon.classList.remove('hidden');
+    sunIcon.classList.add('hidden');
+  }
+});
+
 // Start Game on Load
 init();
