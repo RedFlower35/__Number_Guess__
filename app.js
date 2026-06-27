@@ -1,7 +1,6 @@
 // Game State
 let targetNumber = 0;
 let attempts = 0;
-const maxAttempts = 10;
 let minRange = 1;
 let maxRange = 100;
 let isGameOver = false;
@@ -11,7 +10,6 @@ let guessHistory = [];
 // DOM Elements
 const rangeDisplay = document.getElementById('range-display');
 const attemptsDisplay = document.getElementById('attempts-display');
-const progressBar = document.getElementById('progress-bar');
 const messageEl = document.getElementById('message');
 const guessForm = document.getElementById('guess-form');
 const guessInput = document.getElementById('guess-input');
@@ -37,9 +35,7 @@ function init() {
 
   // Reset UI
   rangeDisplay.textContent = '1 - 100';
-  attemptsDisplay.textContent = maxAttempts;
-  progressBar.style.width = '100%';
-  progressBar.style.background = 'linear-gradient(to right, #6366f1, #a855f7)';
+  attemptsDisplay.textContent = 0;
   messageEl.textContent = '請輸入 1 到 100 之間的數字開始遊戲';
   messageEl.className = 'game-message';
   
@@ -68,18 +64,7 @@ function checkGuess(num) {
   }
 
   attempts++;
-  const remaining = maxAttempts - attempts;
-  attemptsDisplay.textContent = remaining;
-  
-  // Progress bar calculation
-  const progressPercent = (remaining / maxAttempts) * 100;
-  progressBar.style.width = `${progressPercent}%`;
-  
-  if (progressPercent <= 30) {
-    progressBar.style.background = 'var(--danger-color)';
-  } else if (progressPercent <= 60) {
-    progressBar.style.background = '#fbbf24';
-  }
+  attemptsDisplay.textContent = attempts;
 
   let result = '';
   let badgeClass = '';
@@ -110,11 +95,6 @@ function checkGuess(num) {
 
   // Add to history
   addHistoryItem(attempts, num, result, badgeClass);
-
-  if (attempts >= maxAttempts && !isWin) {
-    isGameOver = true;
-    setMessage(`遊戲結束！次數已耗盡。答案是 ${targetNumber}。`, 'lose');
-  }
 
   if (isGameOver) {
     endGame();
